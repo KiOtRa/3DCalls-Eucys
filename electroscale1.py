@@ -21,7 +21,7 @@ board.digital[pin].mode = PWM
 def sendPwm(intensityNormal):
 	global pin
 	pwm = intensityNormal/256.0 #float entre 0 et 1
-	print("Pourcentage de l'intensité pour le pin {}: {}".format(pin,pwm*100))
+	print("Intensity pourcentage for the pin {}: {}".format(pin,pwm*100))
 	board.digital[pin].write(pwm)
 	sleep(0.005)
 
@@ -33,7 +33,7 @@ def refresher(intensityNormal):
 	a=((mu * intensityNormal)/(2*rayon))
 	b= (rayon/math.sqrt((rayon*rayon)+(distance*distance)))**3
 	result= spires*a*b
-	magnfield.configure(text="Champ magnétique à 2cm: {}T".format(result))
+	magnfield.configure(text="Magnetic field 2cm up: {}T".format(result))
 	#Pwm
 	sendPwm(intensityNormal)
 
@@ -41,7 +41,7 @@ root.geometry("800x600")
 root.configure(bg="white")
 changvar = Scale(root,from_ =255,to =0,bg="gray",orient=VERTICAL,length = 400, sliderlength=80,label="Controle de l'intensité",variable=intensity)
 changvar.place(x=50,y=50)
-magnfield = Label(root,bg="gray",text="Champ magnétique à 2cm: {}T".format(result))
+magnfield = Label(root,bg="gray",text="Magnetic field 2cm up: {}T".format(result))
 magnfield.place(x=50,y=500)
 intensity.trace("w",lambda *args: refresher(intensity.get()))
 
